@@ -18,3 +18,15 @@ jobs:
           args: test
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+      - name: Snyk Container Security Test
+        uses: snyk/actions/docker@master
+        with:
+          image: gcr.io/project-management-ci-cd/my-app:latest
+          args: test
+       
+      - name: Run Snyk with severity filter
+        uses: snyk/actions@master
+        with:
+          args: test --severity-threshold=high
+        
